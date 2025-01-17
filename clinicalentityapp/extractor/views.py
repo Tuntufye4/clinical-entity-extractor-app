@@ -17,7 +17,7 @@ col_dict["PERSON"] = "#800000"  # Add color for PERSON entity
 options = {'ents': med7.pipe_labels['ner'] + ["PERSON"], 'colors': col_dict}
 
 def extract_clinical_entities(text):
-    """Extract and visualize clinical entities from the text."""
+    """Extract and visualize clinical entities from the text."""  
     # Process text using both models
     med7_doc = med7(text)
     general_doc = general_nlp(text)
@@ -69,6 +69,11 @@ def clinical_extraction_view(request):
 
             # Convert the extracted data into a DataFrame
             df = pd.DataFrame([extracted_data])
+
+            # Move the "PERSON" column to the beginning if it exists
+            if "PERSON" in df.columns:
+                columns = ["PERSON"] + [col for col in df.columns if col != "PERSON"]
+                df = df[columns]
 
             # Convert the DataFrame to an HTML table
             table_html = df.to_html(index=False)

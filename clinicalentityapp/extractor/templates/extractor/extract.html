@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinical Entity Extraction</title>
     <style>
-        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            background: linear-gradient(to bottom, #e6e9f0, #eef1f5);
+            background-color: #f9f9f9;
             margin: 0;
             padding: 20px;
         }
@@ -17,26 +16,19 @@
         h1 {
             color: #333;
             text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 20px;
         }
 
-        h2 {
-            color: #444;
-            text-align: center;
-            font-size: 1.8em;
-            margin-top: 40px;
-        }
-
-        /* Form Styling */
         form {
             background-color: #fff;
             border: 1px solid #ccc;
             padding: 20px;
-            border-radius: 8px;
-            max-width: 500px;
+            border-radius: 5px;
+            max-width: 600px;
             margin: 0 auto;
-            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         form button {
@@ -44,84 +36,62 @@
             background-color: #007BFF;
             color: #fff;
             border: none;
-            padding: 12px 25px;
+            padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            text-align: center;
         }
 
         form button:hover {
             background-color: #0056b3;
         }
 
-        /* Table Container */
-        div {
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h2 {
+            color: #555;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .table-container {
             margin-top: 20px;
             background-color: #fff;
             border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 900px;
-            margin: 40px auto;
-            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Table Styling */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 0 auto;
-            font-size: 16px;
         }
 
         table th, table td {
             border: 1px solid #ddd;
-            padding: 12px 15px;
+            padding: 8px;
             text-align: left;
         }
 
         table th {
             background-color: #007BFF;
             color: white;
-            font-weight: bold;
         }
 
         table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        table tr:nth-child(odd) {
-            background-color: #fff;
+            background-color: #f2f2f2;
         }
 
         table tr:hover {
-            background-color: #f1f1f1;
-            cursor: pointer;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            h1, h2 {
-                font-size: 1.8em;
-            }
-
-            form {
-                padding: 15px;
-            }
-
-            table th, table td {
-                font-size: 14px;
-                padding: 10px;
-            }
-
-            div {
-                padding: 15px;
-            }
+            background-color: #ddd;
         }
     </style>
 </head>
@@ -130,12 +100,17 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Extract Entities</button>
+        <div class="button-container">
+            <button type="submit">Extract Entities</button>
+            {% if table_html %}
+                <button type="submit" name="download_pdf" value="1">Download as PDF</button>
+            {% endif %}
+        </div>
     </form>
     
     {% if table_html %}
         <h2>Extracted Clinical Entities</h2>
-        <div>
+        <div class="table-container">
             {{ table_html|safe }}
         </div>
     {% endif %}
