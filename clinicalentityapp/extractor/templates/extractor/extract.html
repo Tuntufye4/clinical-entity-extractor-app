@@ -58,6 +58,22 @@
             margin-top: 30px;
         }
 
+        .search-container {
+            max-width: 800px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: flex-end; 
+            gap: 10px;
+        }
+
+        .search-container input {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
         .table-container {
             margin-top: 20px;
             background-color: #fff;
@@ -102,17 +118,44 @@
         {{ form.as_p }}
         <div class="button-container">
             <button type="submit">Extract Entities</button>
-            {% if table_html %}
-                <button type="submit" name="download_pdf" value="1">Download as PDF</button>
-            {% endif %}
         </div>
     </form>
     
     {% if table_html %}
         <h2>Extracted Clinical Entities</h2>
+        <!-- Search bar -->
+        <div class="search-container">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by person name..."
+                onkeyup="filterTable()"
+            />
+        </div>
+
+        <!-- Table container -->
         <div class="table-container">
             {{ table_html|safe }}
         </div>
     {% endif %}
+
+    <script>
+        function filterTable() {
+            const searchInput = document.getElementById("searchInput");
+            const filter = searchInput.value.toLowerCase();
+            const table = document.querySelector(".table-container table");
+            const rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                const personCell = rows[i].getElementsByTagName("td")[0]; // Assuming "PERSON" is the first column
+                if (personCell) {
+                    const textValue = personCell.textContent || personCell.innerText;
+                    rows[i].style.display = textValue.toLowerCase().includes(filter)
+                        ? ""
+                        : "none";
+                }
+            }  
+        }
+    </script>
 </body>
 </html>

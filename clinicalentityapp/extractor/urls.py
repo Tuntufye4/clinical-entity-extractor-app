@@ -1,8 +1,7 @@
 from django.urls import path
-from . import views
+from .views import clinical_extraction_view
 
 urlpatterns = [
-    path("", views.clinical_extraction_view, name="clinical_extraction"),
+    path("", clinical_extraction_view, name="clinical_extraction_view"),  
 ]
-
 
