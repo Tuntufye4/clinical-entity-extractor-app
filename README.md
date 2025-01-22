@@ -19,6 +19,12 @@ Run the following command to download and install the en_core_web_sm model:
 python -m spacy download en_core_web_sm
 ```
 
+Run the following command to download and install the en-core-med7-lg model:
+
+```bash
+
+```
+
 
 ## Getting Started
 
