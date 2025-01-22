@@ -4,8 +4,21 @@ App which extracts clinical entities from clinical notes and returns a structure
 ## Features
 -
 
-## Requirements
--
+## Prerequisites
+
+
+- Python 3.8+
+- django
+- spacy==3.4.4
+- en_core_web_sm
+- en-core-med7-lg==3.4.2.1
+
+Run the following command to download and install the en_core_web_sm model:
+
+```bash
+python -m spacy download en_core_web_sm
+```
+
 
 ## Getting Started
 
