@@ -11,7 +11,9 @@ App which extracts clinical entities from clinical notes and returns a structure
 1. **Clone the repository**:
 
    ```bash
-   git clone 
+   git clone https://github.com/Tuntufye4/clinical-entity-django-app.git
+
+   ```
 
 
 2. **Preview the app**
