@@ -2,7 +2,10 @@
 App which extracts clinical entities from clinical notes and returns a structured table based on a patient.
 
 ## Features
--
+- Extract clinical entities from clinical notes
+- Summarize clinical notes
+- Anonymize/convert the extracted clinical notes to synthetic data
+- Convert clinical text notes to speech 
 
 ## Prerequisites
 
