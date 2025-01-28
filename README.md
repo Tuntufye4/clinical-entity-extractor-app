@@ -1,5 +1,5 @@
 # clinical-entity-extractor-app
-App which extracts clinical entities from clinical notes and returns a structured table based on a patient.
+App which extracts clinical entities from clinical notes and returns structured data/notes.
 
 ## Features
 - Extract clinical entities from clinical notes
